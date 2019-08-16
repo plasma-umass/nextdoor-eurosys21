@@ -19,7 +19,7 @@ layout: default
 
 <p>Unfortunately, writing correct serverless platforms and using this abstraction 
   in the application, programmers need to know about low-level details of these
-  serverless platforms. For example, when the deployed function is called from an application, the serverless platforms does not ensure that the function will be called right away. Instead the function can be called after any time. Another example is when the serverless platform fails to execute the function. In short, "Serverless Functions are not like ordinary functions". The programmer has to develop application to handle these cases. </p>
+  serverless platforms. For example, when the deployed function is called from an application, the serverless platforms does not ensure that the function will be called right away. Instead the function can be called after any time. Another example is when the serverless platform fails to execute the function. In short, "Serverless Functions are not like ordinary functions". The programmer has to handle these cases in the application. </p>
 
 <h1>Formal Semantics of Serverless Computing</h1>
 
@@ -34,7 +34,7 @@ layout: default
 Serverless platforms encourage programmers to decompose large applications into several small functions. These functions can also be used by other programmers to compose with other functions.
 Smaller functions are not only easier to understand, but they also provides better reusability. 
 
-Unfortunately, current solutions to serverless compositions exhibit significant overhead. We have extended our operational semantics to a new domain specific language called Serverless Programming Language (SPL). SPL provide several interfaces for composing serverless functions and follows the operational semantics. SPL is based on Hughes' arrows and this, it provides the interface using three basic arrow combinators. With SPL our benchmarks runs orders of magnitude faster than <a href="https://github.com/apache/openwhisk/blob/master/docs/conductors.md">OpenWhisk Conductor</a>.
+Unfortunately, current solutions to serverless compositions exhibit significant overhead. We have extended our operational semantics to a new domain specific language called Serverless Programming Language (SPL). SPL provide interfaces for composing serverless functions and follows the operational semantics. SPL is based on provides the interface using three basic arrow combinators of Hughes' arrows. With SPL our benchmarks runs orders of magnitude faster than <a href="https://github.com/apache/openwhisk/blob/master/docs/conductors.md">OpenWhisk Conductor</a>.
 <h2>SPL Implementations</h2>
   <ul>
       <li>OpenWhisk SPL implementation is available <a href="https://github.com/plasma-umass/openwhisk">here</a>.</li>
