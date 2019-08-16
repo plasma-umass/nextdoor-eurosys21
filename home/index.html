@@ -36,6 +36,13 @@ Serverless platforms encourage programmers to decompose large applications into 
 Smaller functions are not only easier to understand, but they also provides better reusability. 
 
 Unfortunately, current solutions to serverless compositions exhibit significant overhead. We have extended our operational semantics to a new domain specific language called Serverless Programming Language (SPL). SPL provide several interfaces for composing serverless functions and follows the operational semantics. SPL is based on Hughes' arrows and this, it provides the interface using three basic arrow combinators. With SPL our benchmarks runs orders of magnitude faster than <a href="https://github.com/apache/openwhisk/blob/master/docs/conductors.md">OpenWhisk Conductor</a>.
+<h2>SPL Implementations</h2>
+  <ul>
+      <li>OpenWhisk SPL implementation is available <a href="https://github.com/plasma-umass/openwhisk">here</a>.</li>
+      <li>Standalone SPL server for Google Cloud Function is available
+          <a href="https://github.com/plasma-umass/spl">here</a>.
+      </li>
+  </ul>
 
 <h1>Technical Paper</h1>
 <p>To know more about our work checkout our paper <a href="https://arxiv.org/abs/1902.05870">Formal Foundations of Serverless Computing</a>.</p>
