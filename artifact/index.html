@@ -1,126 +1,1226 @@
 ---
 layout: default
 ---
+<html>
 
-<div class="row">
-<div class="col-md-6 col-md-offset-3">
-<h1>Introduction</h1>
-<p>
-    We provide a VirtualBox Virtual Machine file as a our artifact. The compressed tar gzip file is available for download <a href="https://drive.google.com/file/d/16ijdYhaQO1Qxwrb3mOREMG-SMVuG_GZ3/view?usp=sharing">here</a>.
-  </p>
-<p>
-    Our artifact contains installed Ubuntu 14.04 with OpenWhisk and SPL already deployed. In addition we have also already deployed SPL and OpenWhisk Conductor Actions that we used for the evaluation. Users can directly invoke these actions to compare the performance. Our artifacts supports has following two benchmarks:
-    
-    <ul>
-      <li>Concurrent Invocations experiment: SPL is consistently faster than OpenWhisk Conductor with increasing concurrent invocations. </li>
-      <li> Request Size experiment: SPL is consistently faster than OpenWhisk Conductor for increasing request size.</li>
-    </ul>
-  </p>
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"Roboto Mono";}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Arial",sans-serif;}
+h1
+	{margin-top:20.0pt;
+	margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:0in;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:20.0pt;
+	font-family:"Arial",sans-serif;
+	font-weight:normal;}
+h2
+	{margin-top:.25in;
+	margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:0in;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:16.0pt;
+	font-family:"Arial",sans-serif;
+	font-weight:normal;}
+h3
+	{margin-top:16.0pt;
+	margin-right:0in;
+	margin-bottom:4.0pt;
+	margin-left:0in;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Arial",sans-serif;
+	color:#434343;
+	font-weight:normal;}
+.MsoChpDefault
+	{font-family:"Arial",sans-serif;}
+.MsoPapDefault
+	{line-height:115%;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
 
-<h1>Getting Started</h1>
-<p><b>Prerequisites</b>: Virtual Box 6.0. 60 GB Disk space. x86 Intel CPU with 4 cores or more with at least 8 GB of RAM.
-</p>
-<p><b>Setting up VirtualBox VM</b>: Following steps will extract and add the Virtual Machine.
-<ul>
-  <li>Extract the openwhisk.tar.gz to folder openwhisk.</li>
-  <li>Open VirtualBox 6.0.</li>
-  <li>Click on Tools.</li>
-  <li>Click on + button in the toolbar.Add openwhisk-1.16-linux.vbox in openwhisk folder.</li>
-</ul>
-</p>
-<p> <b>Starting OpenWhisk</b>: 
-  <ul>
-    <li>Start the VM.</li>
-    <li>Open a terminal in host machine and ssh into the machine:
-      <ul>
-          <li><code>ssh -p 3022 abhinav@127.0.0.1</code></li>
-          <li>Type <code>abhinav</code> as password</li>
-      </ul>
-    <li>Start OpenWhisk by executing:</li>
-    <code><ul>
-        <li>sudo chown -R abhinav:abhinav /tmp/wsk*</li>
-        <li>cd openwhisk/ansible</li>
-        <li>ansible-playbook -i environments/local openwhisk.yml -e mode=clean</li>
-        <li>ansible-playbook -i environments/local openwhisk.yml</li>
-      </ul></code>
-    <li>To test if OpenWhisk is running, execute:
-      <ul>
-          <code><li>wsk -i namespace list</li></code>
-          <li>The output should display guest namespace</li>
-      </ul>
-    </li>
-    <li>To test if OpenWhisk contains all required actions, execute:</li>
-    <ul>
-      <code><li>wsk -i action list</li></code>
-      <li>The output should display several available actions</li>
-    </ul>
-  <li>To test if OpenWhisk Conductor action is running, invoke the deployed action by executing:</li>
-  <ul>
-    <code><li>cd ~/openwhisk-scripts/</li>
-    <li>wsk -i action invoke conductorCost --param-file param-test.js -b -r </li></code>
-    <li>The output should show a json with "test" value field "text".</li>
-  </ul>
+</head>
 
-  To test if SPL actions is running execute, invoke the deployed action by executing:
-  <ul>
-  <code><li>cd ~/openwhisk-scripts/</li>
-  <li> wsk -i action invoke Program_kQw1UFK8u2 --param-file param-test.js -b -r</li></code>
-  <li>The output should show a json with "test" value field "text".</li>
-</ul>
-</ul>
-</p>
+<body lang=EN-US style='word-wrap:break-word'>
 
-<h1>Step by Step Instructions</h1>
-<p>After setting up the machine in Getting Started Guide. You can run above mentioned experiments.</p>
-<p>
-  To run Concurrent invocations experiment:
-  <ul>
-    <li>Follow instructions in Getting Started guide to start the machine and OpenWhisk</li>
-    <li>Change to the directory containing scripts</li>
-      <ul><code><li>cd ~/openwhisk-scripts/</li></code></ul>
-    <li>Execute this experiment with 1 invocation to 28 concurrent invocations with each experiment running 5 times. Please note that execution will take around 1 hour. All logs generated by this experiment except any Exception thrown can be safely ignored.</li>
-    <code><ul><li>python experiments.py 10 10 5 28 conductor,spl load</li></ul></code>
-        
-    <li>All data is stored in ~/openwhisk-scripts/data/function-times.csv</li>
-  <li>To produce the graph execute:</li>
-      <ul>
-        <code><li>cd R-scripts </li>
-        <li>R -f ./whisk-results.R</li></code>
-    </ul>
-  <li>You can now view the resulting graph in ~/openwhisk-scripts/whisk-results.pdf. This graph will show that SPL is consistently faster than OpenWhisk conductor with increasing concurrent invocations.</li>
-  <li>Since our experiments generates a lot of data, the logs produced by OpenWhisk can occupy significant space. Before powering off the system, we need to clean OpenWhisk logs. To cleanup OpenWhisks logs: </li>
-  <ul>
-    <code><li>rm -rf /tmp/wsklogs/*</li></code>
-  </ul>
-  <li>Poweroff the system using: </li>
-    <code><ul><li>sudo poweroff</li></ul></code>
-  </ul>
-</p>
+<div class=WordSection1>
 
-<p>
-  To run Response time vs. request size experiment:
-  <ul>
-    <li>Follow instructions in Getting Started guide to start the machine and OpenWhisk</li>
-    <li>Change to the directory containing scripts</li>
-      <code><ul><li>cd ~/openwhisk-scripts/</li></ul></code>
-    <li>To execute this experiment with parameter sizes of 0 KB to 1 MB with each experiment running 5 times. Please note that execution will take around 1 hour. All logs generated by this experiment except any Exception thrown can be safely ignored.
-      </li>
-        <code><ul><li>python experiments.py 10 10 5 1 conductor,spl param
-          </li></ul></code>
-        
-    <li>All data is stored in ~/openwhisk-scripts/data/whisk/parameter-size/1-invocation.csv</li>
-  <li>To produce the graph execute:</li>
-      <ul>
-        <code><li>cd R-scripts </li>
-        <li>R -f ./param-whisk-results.R</li></code>
-    </ul>
-  <li>You can now view the resulting graph in ~/openwhisk-scripts/param-whisk-results.pdf. This graph will show that SPL is consistently faster than OpenWhisk conductor with increasing concurrent invocations.</li>
-  <li>Since our experiments generates a lot of data, the logs produced by OpenWhisk can occupy significant space. Before powering off the system, we need to clean OpenWhisk logs. To cleanup OpenWhisks logs: </li>
-  <ul>
-    <code><li>rm -rf /tmp/wsklogs/*</li></code>
-  </ul>
-  <li>Poweroff the system using: </li>
-    <code><ul><li>sudo poweroff</li></ul></code>
-</p>
+<h1 style='margin-top:24.0pt'><a name="_wopfa3r5nn9v"></a><span lang=EN
+style='font-size:23.0pt;line-height:115%;font-family:"Calibri",sans-serif'>#213
+Accelerating Graph Sampling for Graph Machine Learning using GPUs</span></h1>
+
+<h2><a name="_8abf1pr0gkmf"></a><span lang=EN style='font-size:17.0pt;
+line-height:115%;font-family:"Calibri",sans-serif'>Introduction</span></h2>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>In this document we describe the details of
+the artifact of the paper “Accelerating Graph Sampling for Graph Machine
+Learning using GPUs” and how to reproduce key results of the paper. In the
+paper due to double-blind submission, we refer to our system as <i>cuSampler</i>.
+However, we will change its name to <i>NextDoor</i> in the final version and
+hence, we refer to the system as <i>NextDoor</i> in the artifact and in this
+document. Our system is publicly available at </span><span lang=EN><a
+href="https://github.com/plasma-umass/nextdoor/"><span style='font-size:12.0pt;
+line-height:115%;font-family:"Calibri",sans-serif;color:#1155CC'>https://github.com/plasma-umass/nextdoor/</span></a></span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+. Our experimental setup is available at </span><span lang=EN><a
+href="https://github.com/abhijangda/nextdoor-experiments/"><span
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif;
+color:#1155CC'>https://github.com/abhijangda/nextdoor-experiments/</span></a></span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+. </span></p>
+
+<h2><a name="_bnun6ag40rwu"></a><span lang=EN style='font-size:17.0pt;
+line-height:115%;font-family:"Calibri",sans-serif'>Availability</span></h2>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>NextDoor</span></b><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>:
+NextDoor is publicly available at </span><span lang=EN><a
+href="https://github.com/plasma-umass/nextdoor/"><span style='font-size:12.0pt;
+line-height:115%;font-family:"Calibri",sans-serif;color:#1155CC'>https://github.com/plasma-umass/nextdoor/</span></a></span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+. This repo contains the source code of the NextDoor and implementation of all
+10 sampling algorithms described in the paper (DeepWalk, PPR, Node2Vec,
+MultiRW, KHop, Layer, ClusterGCN, MVS, FastGCN, and LADIES). </span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>README.md file explains the source code,
+points to files containing the implementation of these algorithms in NextDoor,
+how to execute these implementations, and how to generate the Python 2/3
+modules of these implementations. </span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></b></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Writing New Sampling Algorithm in NextDoor:</span></b><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+NextDoor’s public repository </span><span lang=EN><a
+href="https://github.com/plasma-umass/nextdoor/"><span style='font-size:12.0pt;
+line-height:115%;font-family:"Calibri",sans-serif;color:#1155CC'>https://github.com/plasma-umass/nextdoor/</span></a></span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+describes an example application that users can follow to create and execute a
+new sampling algorithm. README.md describes the process.</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></b></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Datasets: </span></b><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>All
+graphs used in our evaluation (PPI, Reddit, Patents, Orkut, LiveJournal1) are
+available in a ZIP file at </span><span lang=EN><a
+href="https://drive.google.com/file/d/19duY39ygWS3RAiqEetHUKdv-4mi_F7vj/view?usp=sharing"><span
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif;
+color:#1155CC'>https://drive.google.com/file/d/19duY39ygWS3RAiqEetHUKdv-4mi_F7vj/view?usp=sharing</span></a></span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+. </span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Benchmarks: </span></b><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>We
+use 10 sampling algorithms as benchmarks. Implementations of these algorithms
+in NextDoor are available in src/apps directory. We also present the NextDoor’s
+implementations of sampling algorithms integrated in existing GNNs at </span><span
+lang=EN><a href="https://github.com/abhijangda/nextdoor-experiments/"><span
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif;
+color:#1155CC'>https://github.com/abhijangda/nextdoor-experiments/</span></a></span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'> 
+. README.md describes steps to execute this integration for all GNNs. Moreover,
+our benchmarking infrastructure, i.e., scripts to execute these experiments are
+available in same repo.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Baselines: </span></b><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>We
+have two baselines. First, KnightKing, which is a system to describe and
+execute random walks. It is available at </span><span lang=EN><a
+href="https://github.com/KnightKingWalk/KnightKing"><span style='font-size:
+12.0pt;line-height:115%;font-family:"Calibri",sans-serif;color:#1155CC'>https://github.com/KnightKingWalk/KnightKing</span></a></span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+. Second, we use the samplers in existing GNNs as baselines. We have collected
+all these GNNs implementations in a single repository </span><span lang=EN><a
+href="https://github.com/abhijangda/nextdoor-experiments/"><span
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif;
+color:#1155CC'>https://github.com/abhijangda/nextdoor-experiments/</span></a></span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>.
+We provide scripts to evaluate these baselines. </span></p>
+
+<h2><a name="_9ipmqht1lpam"></a><span lang=EN style='font-size:17.0pt;
+line-height:115%;font-family:"Calibri",sans-serif'>Functionality</span></h2>
+
+<h3><a name="_vhujeojz02sv"></a><span lang=EN>Prerequisites</span></h3>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Linux Installation: </span></b><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>We
+recommend using Ubuntu 18.04 as the Linux OS. We have not tested our artifact
+with any other OS but we believe Ubuntu 20.04 should work.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Install Dependencies: </span></b><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>Execute
+following commands to install dependencies.</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>sudo apt update &amp;&amp; sudo apt install gcc
+linux-headers-$(uname -r) make g++ git python-dev python3-dev wget unzip
+python3-pip cmake openmpi* libopenmpi*  libmetis-dev</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";background:
+#EFEFEF'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>sudo pip3 install virtualenv</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";background:
+#EFEFEF'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN>Install CUDA: </span></b><span lang=EN>We
+need to install CUDA before proceeding further. In our experiments we used CUDA
+11.0 on Ubuntu 18.04. NextDoor uses other CUDA libraries like cuRAND and CUB.
+These libraries are not available as part of CUDA before version 11. Hence, we
+recommend using CUDA 11.0 because this will make the build process easier. CUDA
+11.0 toolkit can be downloaded from
+https://developer.nvidia.com/cuda-11.0-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=Ubuntu&amp;target_version=1804&amp;target_type=runfilelocal</span></p>
+
+<p class=MsoNormal><span lang=EN>While installing CUDA please make sure that <u>you
+install CUDA samples in your home directory</u> and <u>CUDA is installed in </u></span><u><span
+lang=EN style='font-family:"Courier New"'>/usr/local/cuda</span></u><span
+lang=EN style='font-family:"Calibri",sans-serif'>. </span><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>Alternatively,
+CUDA samples can be copied from </span><span lang=EN style='font-size:12.0pt;
+line-height:115%;font-family:"Courier New"'>/usr/local/cuda/samples/</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>.</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN>Check CUDA Installation:</span></b><span
+lang=EN> To check CUDA installation, go to CUDA samples installed in your home
+directory and execute following commands:</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#D9D9D9'>cd ~/NVIDIA_CUDA-11.0_Samples/1_Utilities/deviceQuery</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#D9D9D9'>make</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#D9D9D9'>./deviceQuery</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Executing this </span><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Courier New"'>deviceQuery</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+command will show the information about GPUs in your system. If there is any
+error then either CUDA device is not present or CUDA driver is not installed
+correctly.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN>Set NVCC Path and CUDA libraries path: </span></b><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>We
+assume that nvcc is present in </span><span lang=EN style='font-size:12.0pt;
+line-height:115%;font-family:"Courier New"'>/usr/local/cuda/bin/nvcc</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>.
+Please make sure that this is a valid path and this nvcc is from CUDA 11.0 by
+using </span><span lang=EN style='font-size:12.0pt;line-height:115%;font-family:
+"Courier New"'>nvcc --version</span><span lang=EN style='font-size:12.0pt;
+line-height:115%;font-family:"Calibri",sans-serif'>. Then export this in your
+PATH variable. Also update LD_LIBRARY_PATH to include CUDA libraries.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#D9D9D9'>export
+PATH=&quot;/usr/local/cuda/bin:$PATH&quot;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#D9D9D9'>export LD_LIBRARY_PATH=&quot;/usr/local/cuda/lib64:$LD_LIBRARY_PATH&quot;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN>Create Parent Directory for Evaluation: </span></b></p>
+
+<p class=MsoNormal><span lang=EN>For functionality and reproducibility create a
+top level directory that contains NextDoor and its experiments. Let say this
+directory is <b>NextDoorEval</b>.</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>mkdir NextDoorEval</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>export TOP_DIR=`pwd`/NextDoorEval  </span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>export NEXTDOOR_DIR=$TOP_DIR/NextDoor</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New"'> </span></p>
+
+<p class=MsoNormal><b><span lang=EN>Clone NextDoor and Download Dataset: </span></b><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>We
+must clone the repository and download  the Graph dataset from </span><span
+lang=EN><a
+href="https://drive.google.com/file/d/19duY39ygWS3RAiqEetHUKdv-4mi_F7vj/view?usp=sharing"><span
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif;
+color:#1155CC'>https://drive.google.com/file/d/19duY39ygWS3RAiqEetHUKdv-4mi_F7vj/view?usp=sharing</span></a></span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+. This zip file contains five graphs (PPI, Reddit, Orkut, Patents,
+LiveJournal1). Extract this zip file in </span><span lang=EN style='font-size:
+12.0pt;line-height:115%;font-family:"Roboto Mono"'>input</span><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+directory in the NextDoor’s repo clone directory. Following commands performs
+these operations:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#EFEFEF'>cd $TOP_DIR</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#EFEFEF'>git clone </span><span
+lang=EN style='font-size:10.0pt;line-height:115%;font-family:"Courier New";
+color:black;background:#F3F3F3'>--recurse-submodules h</span><span lang=EN
+style='font-size:10.0pt;line-height:115%;font-family:"Courier New";color:black;
+background:#EFEFEF'>ttps://github.com/plasma-umass/NextDoor.git</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#EFEFEF'>cd NextDoor</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#EFEFEF'>git submodule update
+--init --recursive</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#EFEFEF'>./downloadDataset.sh</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#EFEFEF'>unzip input.zip</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";background:
+#EFEFEF'>&nbsp;</span></p>
+
+<h3><a name="_y8hicupsx37o"></a><span lang=EN>Executing Example Application </span></h3>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>After setting up, we are now ready to execute
+sampling algorithms using NextDoor.</span><span lang=EN style='font-size:12.0pt;
+line-height:115%'> </span><span lang=EN style='font-size:12.0pt;line-height:
+115%;font-family:"Calibri",sans-serif'>NextDoor’s repository describes several
+sampling algorithms. </span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Uniform Random Walk application is described
+in </span><span lang=EN style='font-size:12.0pt;line-height:115%;font-family:
+"Courier New"'>example</span><span lang=EN style='font-size:12.0pt;line-height:
+115%;font-family:"Calibri",sans-serif'> directory in the repository. File </span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Courier New"'>uniformRandWalk.cu</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+shows this implementation. The implementation can be compiled by doing </span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Courier New"'>make</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+. Produced binary (</span><span lang=EN style='font-size:12.0pt;line-height:
+115%;font-family:"Courier New"'>uniformRandWalk)</span><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'> can
+be executed to perform random walk on a graph. Following commands shows how to
+build this example, and execute it on PPI graph using Transit Parallel
+technique:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#EFEFEF'>cd
+$NEXTDOOR_DIR/example</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#EFEFEF'>make</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#EFEFEF'>./uniformRandWalk -g
+../input/ppi.data -t edge-list -f binary -n 1 -k TransitParallel -l</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Command Line Arguments are:</span></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Courier New"'>-g </span><span lang=EN style='font-size:12.0pt;
+     line-height:115%;font-family:"Calibri",sans-serif'>is path to graph, </span></li>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Courier New"'>-t </span><span lang=EN style='font-size:12.0pt;
+     line-height:115%;font-family:"Calibri",sans-serif'>is the type of storage
+     of graph, which can be either a list of edges (edge-list)</span><span
+     lang=EN style='font-size:12.0pt;line-height:115%'> or adjacency list
+     (adj-list), </span></li>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Courier New"'>-f </span><span lang=EN style='font-size:12.0pt;
+     line-height:115%;font-family:"Calibri",sans-serif'>is the format of
+     storage, which can be either binary or text,</span><span lang=EN
+     style='font-size:12.0pt;line-height:115%;font-family:"Courier New"'> </span></li>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Courier New"'>-n </span><span lang=EN style='font-size:12.0pt;
+     line-height:115%;font-family:"Calibri",sans-serif'>describes number of
+     times to run it</span></li>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Courier New"'>-k </span><span lang=EN style='font-size:12.0pt;
+     line-height:115%;font-family:"Calibri",sans-serif'>describes the kind of
+     kernel to use Transit Parallel or Sample Parallel </span></li>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Courier New"'>-l </span><span lang=EN style='font-size:12.0pt;
+     line-height:115%;font-family:"Calibri",sans-serif'>describes if load
+     balancing, caching, and other optimizations must be applied on Transit
+     Parallel. This argument is valid for Transit Parallel only.</span></li>
+</ol>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>After executing  we expect an output like
+below. This output shows the number of vertices (56944) and edges(1612348) of
+graph, one or more GPUs used by NextDoor (GPU 0),  the size of sample/walk
+(100), number of samples to generate (56944), End to End Time (0.020685), the
+break down of execution time, and the total number of vertices sampled in all
+walks (5694400).</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif;background:#EFEFEF'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Graph Binary Loaded</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Graph has 1612348 edges and 56944 vertices</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Using GPUs: [0,]</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Final Size of each sample: 100</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Maximum Neighbors Sampled at each step: 1</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Number of Samples: 56944</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Maximum Threads Per Kernel: 57088</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Transit Parallel: End to end time 0.020685 secs</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>InversionTime: 0.0102875, LoadBalancingTime: 0.00653291,
+GridKernelTime: 7.84397e-05, ThreadBlockKernelTime: 4.05312e-06,
+SubWarpKernelTime: 2.14577e-06, IdentityKernelTime: 0.00361753</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>totalSampledVertices 5694400</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Using Python Modules</span></b><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>:
+Additionally, the example contains (</span><span lang=EN style='font-size:12.0pt;
+line-height:115%;font-family:"Courier New"'>uniformRandWalk.cu)</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+Python 2 and Python 3 modules for invoking NextDoor’s implementation. Doing
+make will build both modules. Python2 module is called UniformRandomWalkPy2 and
+Python 3 module is called UniformRandomWalkPy3. Below shows an example of how
+Python 2 can be used to invoke UniformRandomWalkPy2’s functions.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>$ python2</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Python 2.7.17 (default, Sep 30 2020, 13:38:04)</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>[GCC 7.5.0] on linux2</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Type &quot;help&quot;, &quot;copyright&quot;,
+&quot;credits&quot; or &quot;license&quot; for more information.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>&gt;&gt;&gt; import UniformRandomWalkPy2</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>&gt;&gt;&gt; UniformRandomWalkPy2.initSampling(</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Courier New";
+color:black;background:#D9D9D9'>&quot;</span><span lang=EN style='font-family:
+"Courier New";color:black;background:#EFEFEF'>../input/ppi.data</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Courier New";
+color:black;background:#D9D9D9'>&quot;</span><span lang=EN style='font-family:
+"Courier New";color:black;background:#EFEFEF'>)</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Graph Binary Loaded</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Using GPUs: [0,]</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Final Size of each sample: 100</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Maximum Neighbors Sampled at each step: 1</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Number of Samples: 56944</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Maximum Threads Per Kernel: 57088</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>&gt;&gt;&gt; UniformRandomWalkPy2.sample()</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>SampleParallel: End to end time 0.00748205 secs</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Both modules defines following functions.</span></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal><span lang=EN style='font-family:"Courier New"'>initSampling(graph)</span><span
+     lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>:
+     It takes a path to graph that is stored in a binary edge-list format.</span></li>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Courier New"'>sample()</span><span lang=EN style='font-size:
+     12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>: This will
+     perform the sampling</span></li>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Courier New"'>finalSamples()</span><span lang=EN
+     style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>:
+     This will return the final samples in the form of a Python List.</span></li>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Courier New"'>finalSampleLength()</span><span lang=EN
+     style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>:
+     This will return the size of each sample.</span></li>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Courier New"'>finalSamplesArray()</span><span lang=EN
+     style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>:
+     This avoids building a list and gives a pointer to the final samples array
+     of NextDoor. This pointer can then be converted to a numpy array.</span></li>
+</ol>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>The  above information for these functions
+are also available as docStrings, which can be accessed by
+&lt;module-name&gt;.__doc__ or &lt;module-name&gt;.&lt;function&gt;.__doc__.</span></p>
+
+<h3><a name="_fwkyfw76oopf"></a><span lang=EN>Executing All Other Sampling
+Algorithms</span></h3>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>In the repository, </span><span lang=EN
+style='font-family:"Courier New"'>src/apps/</span><span lang=EN
+style='font-family:"Calibri",sans-serif'> </span><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>directory
+contains implementations of all 10 sampling algorithms. The </span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Courier New"'>randomwalks</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+directory contains implementation of DeepWalk, PPR, and Node2Vec. Other
+sampling algorithms are in their own directory. To execute a sampling
+algorithm, we need to follow similar commands as above. For example, to execute
+FastGCN:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#EFEFEF'>cd </span><span
+lang=EN style='font-family:"Courier New";color:black;background:#EFEFEF'>$NEXTDOOR_DIR/</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Courier New";
+color:black;background:#EFEFEF'>src/apps/fastgcn/</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#EFEFEF'>make -j</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>./FastGCNSampling -g ../../../input/ppi.data -t edge-list
+-f binary -n 1 -k TransitParallel -l</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Courier New";background:#EFEFEF'>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif;background:white'>Using Python Modules:</span></b><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif;
+background:white'> Alternatively, users can compile these applications in a
+Python 2 or Python 3 Module and call from there. We have predefined modules for
+LADIES, FastGCN, ClusterGCN, and KHop. These modules are meant to be used to
+integrate NextDoor’s implementation of sampling algorithms in PyTorch or
+Tensorflow implementation of GNNs. </span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif;background:white'>For example, to use FastGCN
+from Python 3, execute following commands:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif;background:white'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#EFEFEF'>cd </span><span
+lang=EN style='font-family:"Courier New";color:black;background:#EFEFEF'>$TOP_DIR/NextDoor/</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Courier New";
+color:black;background:#EFEFEF'>src/apps/fastgcn/</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#EFEFEF'>make</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Courier New";background:#EFEFEF'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif;background:white'>This will generate a
+“FastGCNSamplingPy3.so” file, which can be imported in Python3 and sampling can
+be done as follows:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif;background:white'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>$ python3</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Python 3.6.9 (default, Oct  8 2020, 12:12:24)</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>[GCC 8.4.0] on linux</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Type &quot;help&quot;, &quot;copyright&quot;,
+&quot;credits&quot; or &quot;license&quot; for more information.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>&gt;&gt;&gt; import FastGCNSamplingPy3</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>&gt;&gt;&gt; FastGCNSamplingPy3.initSampling(&quot;../../../input/ppi.data&quot;)</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Graph Binary Loaded</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Using GPUs: [0,]</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Final Size of each sample: 320</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Maximum Neighbors Sampled at each step: 64</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Number of Samples: 10000</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Maximum Threads Per Kernel: 655360</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>&gt;&gt;&gt; FastGCNSamplingPy3.sample()</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>SampleParallel: End to end time 0.0733922 secs</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Collective Neighborhood Computing 0.0266759 secs</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>&gt;&gt;&gt; FastGCNSamplingPy3.finalSamples()</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>&lt;A python list containing values of all samples&gt;</span></p>
+
+<h2><a name="_41x2p4axo4i7"></a><span lang=EN style='font-size:17.0pt;
+line-height:115%;font-family:"Calibri",sans-serif'>Reproducing Results</span></h2>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>We will describe how to reproduce key results
+of paper in Figure 6, Figure 7, Figure 8, Figure 10, Table 4, and Table 5. </span></p>
+
+<h3><a name="_oc4t1j7ofio0"></a><span lang=EN>Setting Up Baselines</span></h3>
+
+<p class=MsoNormal><span lang=EN>We will now set up baselines: KnightKing and
+existing GNNs.</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN>KnightKing:</span></b><span lang=EN> To
+setup KnightKing, clone from repository <a
+href="https://github.com/KnightKingWalk/KnightKing"><span style='color:#1155CC'>https://github.com/KnightKingWalk/KnightKing</span></a>
+and compile using cmake. Below commands perform these operations:</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#F3F3F3'>cd $TOP_DIR</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#F3F3F3'>git clone
+https://github.com/KnightKingWalk/KnightKing.git --recurse-submodules</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#F3F3F3'>cd KnightKing</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#F3F3F3'>mkdir build
+&amp;&amp; cd build</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#F3F3F3'>cmake .. &amp;&amp;
+make -j</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#F3F3F3'>ls bin</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Compiled binaries are in directory build/bin.
+This directory should contain three binaries: deepwalk, node2vec, and ppr.</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></b></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Existing GNNs: </span></b><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>We
+will now set up existing GNNs within the nextdoor-experiments repo. Execute
+below commands to clone nextdoor-experiments repo and setup GNNs.</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></b></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#F3F3F3'>cd $TOP_DIR</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#F3F3F3'>git clone
+https://github.com/abhijangda/nextdoor-experiments.git --recurse-submodules</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#F3F3F3'>cd
+nextdoor-experiments</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#F3F3F3'>./setup.sh</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";color:black;background:#F3F3F3'>export
+NEXTDOOR_EXP_DIR=$TOP_DIR/nextdoor-experiments</span></p>
+
+<h3><a name="_jlksf732aytj"></a><span lang=EN>Testing NextDoor</span></h3>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Setting up Google Test:</span></b><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+We need to setup Google Test. Within the NextDoor directory, execute following
+commands to build googletest.</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></b></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>cd $NEXTDOOR_DIR/googletest</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>mkdir build          </span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>cd build</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>cmake .. &amp;&amp; make -j</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></b></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Building Tests: </span></b><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>To
+build all single GPU and multi GPU tests execute following command in NextDoor
+directory:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>cd $NEXTDOOR_DIR</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>make -j</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'> </span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Testing: </span></b><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>We
+recommend testing DeepWalk before moving forward. To test an application, say
+DeepWalk, execute the following in the NextDoor directory.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>cd $NEXTDOOR_DIR</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>./build/tests/singleGPU/deepwalk</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>This will show output like below:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>[==========] Running 15 tests from 1 test suite.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>[----------] Global test environment set-up.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>[----------] 15 tests from DeepWalk</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>[ RUN      ] DeepWalk.LiveJournalTP</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Graph Binary Loaded</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Graph has 68555726 edges and 4847569 vertices</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Using GPUs: [0,]</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Final Size of each sample: 100</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Maximum Neighbors Sampled at each step: 1</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Number of Samples: 4847569</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Maximum Threads Per Kernel: 4847616</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Transit Parallel: End to end time 0.268283 secs</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>InversionTime: 0.0716658, LoadBalancingTime: 0,
+GridKernelTime: 0, ThreadBlockKernelTime: 0, SubWarpKernelTime: 0,
+IdentityKernelTime: 0</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>totalSampledVertices 172135742</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>checking results</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>Adj Matrix of Graph Created</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>[    OK ] DeepWalk.LiveJournalTP (17441 ms)</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>If any error comes please let us know over
+EuroSys HotCrp.</span></p>
+
+<h3><a name="_jdxuz485eauz"></a><span lang=EN style='font-family:"Calibri",sans-serif'>Performance
+Evaluation of Sampling Algorithms [Total Time: 4 Hours]</span></h3>
+
+<p class=MsoNormal><b><span lang=EN>System Requirements: </span></b><span
+lang=EN> For performance evaluation following requirements are needed.</span></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal><span lang=EN>CPU and RAM: NextDoor and KnightKing do not
+     require more than 10 GB of RAM. However, running existing GNNs on large
+     graphs (patents, livejournal, and orkut) requires upto 40 GB of RAM. For
+     performance evaluation against CPU baselines, (KnightKing and all GNNs),
+     we used </span><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Calibri",sans-serif'>two 16-core Intel Xeon Silver CPUs. 
+     Hence, we recommend that the reviewer do performance evaluation on similar
+     systems. </span></li>
+ <li class=MsoNormal><span lang=EN>GPU: </span><span lang=EN style='font-size:
+     12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>In our paper we
+     performed evaluation on NVIDIA Tesla V100 for single GPU results and 4
+     NVIDIA Tesla V100 for multiple GPU results. We also did performance
+     evaluation on a NVIDIA GeForce GTX 1080Ti and found that performance
+     dropped by a factor of 2 as compared to Tesla V100. In this case, We still
+     obtained orders of magnitude improvement over CPU baselines. Hence, the
+     evaluation of NextDoor vs CPU baselines (in Figure 7a and Figure 7b) will
+     drop if a GPU with less execution resources than Tesla V100 is used.
+     However, we still expect orders of magnitude improvement over CPU
+     baselines and most of the other results in Figure 6 should show similar
+     improvement over SP and TP. We require the GPU to have atleast 8 GB of
+     available RAM.</span></li>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Calibri",sans-serif'>Disk Space: Our experiments will need
+     atleast 30 GB of disk space.</span></li>
+</ol>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>We will now do performance evaluation of
+sampling implementations in NextDoor against the baselines to reproduce Figures
+6 and 7 and Table 5. </span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>In some cases you can see more improvement
+than presented in the paper. This is because we have been working on a new and
+optimized implementation of NextDoor.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Before doing performance evaluation, (i)
+follow all steps of the “Prerequisite” section to clone NextDoor, and obtain
+datasets, (ii) follow all steps of “Setting Up Baselines” section to obtain the
+baselines, and (iii) follow all steps of “Testing NextDoor” section to build
+tests. We will use scripts available in nextdoor-experiments for benchmarking.
+Hence, all scripts must be executed in the <u>order below</u>.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>To keep the packing simple we updated the
+implementation of these GNNs to use the latest version of NumPy, PyTorch and
+Tensorflow, so, that we have only a single CUDA version, i.e. CUDA 11.0.
+Unfortunately, with this new version they have added a restriction that each
+tensor must be of length less than 2GB. This is not possible for large graphs
+like Orkut and LiveJournal. Hence, for following GNNs we get Out of Memory
+error.</span></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Calibri",sans-serif'>GraphSAGE, MVS, and ClusterGCN gives out
+     of Memory on Orkut and LiveJournal</span></li>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Calibri",sans-serif'>GraphSAINT, FastGCN, and LADIES gives
+     out of Memory on Orkut</span></li>
+</ol>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>We will update the results in the paper to
+reflect this change.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Reproduce Table 5:</span></b><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'> We
+will reproduce end to end speedup experiments for GraphSAGE, FastGCN, and
+LADIES. Unfortunately, we couldn't get ClusterGCN integration to run before the
+submission deadline. For GraphSAGE we found that newer versions of Numpy and
+Tensorflow do not allow allocating tensors of size more than 2 GB. Hence, for
+Orkut and LiveJournal graph, we report OOM for GraphSAGE. We will update this
+in the final version of our paper.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>This experiment will take <u>upto 1 hour</u>
+to execute.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Within the nextdoor-experiments directory
+execute below command and provide the absolute path to nextdoor.</span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span lang=EN style='font-family:
+"Courier New";color:black;background:#EFEFEF'>cd $NEXTDOOR_EXP_DIR</span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span lang=EN style='font-family:
+"Courier New";color:black;background:#EFEFEF'>python3 runEndToEnd.py -nextdoor
+$NEXTDOOR_DIR</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><i><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Results</span></i><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>:
+This script will print the results of evaluation.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Reproduce Figure 6, 7, and 10:</span></b><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+We will now reproduce the numbers in Figure 6, 7, and 10. Following commands
+will execute KnightKing, existing GNNs, sampling applications in NextDoor and
+produce the numbers in a tabular format. There are two scripts to reproduce
+results.</span></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Calibri",sans-serif'>First script is </span><span lang=EN
+     style='font-family:"Courier New";color:black;background:#EFEFEF'>runGNNSampling.py</span><span
+     lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+     . It executes all GNNs and stores the results. This command can take <u>upto
+     2 hours </u>and require upto 40 GB of RAM to do performance evaluation for
+     large graphs (Orkut, Patents, and LiveJournal). Evaluation on small graphs
+     (PPI and Reddit) take upto 10 minutes. To use only small graphs set </span><span
+     lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Courier New"'>-useSmallGraphs
+     True </span><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Calibri",sans-serif'>command line argument.</span></li>
+ <li class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+     background:#EFEFEF'>     </span></li>
+</ol>
+
+<p class=MsoNormal style='text-indent:.5in'><span lang=EN style='font-family:
+"Courier New";color:black;background:#EFEFEF'>cd $NEXTDOOR_EXP_DIR</span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span lang=EN style='font-family:
+"Courier New";color:black;background:#EFEFEF'>python3 runGNNSampling.py
+-nextdoor $NEXTDOOR_DIR</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<ol style='margin-top:0in' start=3 type=1>
+ <li class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+     font-family:"Calibri",sans-serif'>Second script is </span><span lang=EN
+     style='font-family:"Courier New";color:black;background:#EFEFEF'>runBenchmarks.py
+     </span><span lang=EN style='font-family:"Courier New"'> </span><span
+     lang=EN style='font-family:"Calibri",sans-serif'>  </span><span lang=EN
+     style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>which 
+     executes KnightKing, NextDoor on single GPU, and Nextdoor on multiple
+     GPUs. By default NextDoor will be executed on GPU with ID 0. To use
+     multiple GPUs, use </span><span lang=EN style='font-size:12.0pt;
+     line-height:115%;font-family:"Courier New"'>-gpu</span><span lang=EN
+     style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+     argument to list all GPUs. Following is the example of this script. This
+     script will take <u>upto 30 mins</u>:</span></li>
+</ol>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>cd $NEXTDOOR_DIR</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>make -j</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>cd $NEXTDOOR_EXP_DIR</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>python3 runBenchmarks.py -knightKing $TOP_DIR/KnightKing
+-nextdoor $NEXTDOOR_DIR -gpus 0,1,2,3</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Note that the above command assumes 4 GPUs
+with IDs 0,1,2,3. To use different numbers of GPUs please modify this list. If
+only one GPU is specified then multiple GPU results are not taken.</span></b></p>
+
+<p class=MsoNormal><i><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></i></p>
+
+<p class=MsoNormal><i><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Reprint Previous Results:</span></i><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+Each invocation of this script stores the results in </span><span lang=EN
+style='font-family:"Courier New";color:black;background:#D9D9D9'>benchmarkResults.json</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+file in </span><span lang=EN style='font-family:"Courier New";color:black;
+background:#D9D9D9'>nextdoor-experiments</span><span lang=EN style='font-size:
+12.0pt;line-height:115%;font-family:"Calibri",sans-serif;color:black;
+background:#D9D9D9'> </span><span lang=EN style='font-size:12.0pt;line-height:
+115%;font-family:"Calibri",sans-serif'>directory. To read these results and
+print them, use the optional flag </span><span lang=EN style='font-family:"Courier New";
+color:black;background:#D9D9D9'>-printExistingResults true</span><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>.</span></p>
+
+<p class=MsoNormal><i><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></i></p>
+
+<p class=MsoNormal><i><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Results</span></i><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>: </span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Courier New"'>runBenchmarks.py</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+will produce results for Figure 7a, 7b, 7c, Figure 6, and Figure 10. If </span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Courier New"'>-useSmallGraphs
+True</span><span lang=EN style='font-size:12.0pt;line-height:115%;font-family:
+"Calibri",sans-serif'> is used in runGNNSampling.py then results of Figure 7b
+will be produced only for PPI and Reddit graphs. With larger graphs the speedup
+of NextDoor over existing GNNs increases exponentially.</span></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>&nbsp;</span></b></p>
+
+<p class=MsoNormal><b><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Reproduce Figure 8 and Table 10:</span></b><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
+We will now reproduce the numbers in Figure 8 and Table 10. These results are
+about four performance metrics. To obtain these results we will use script </span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Courier New";
+color:black;background:#EFEFEF'>runPerfAnalysis.py</span><span lang=EN
+style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif;
+background:white'> in </span><span lang=EN style='font-size:12.0pt;line-height:
+115%;font-family:"Courier New";color:black;background:#EFEFEF'>$NEXTDOOR_EXP_DIR</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Courier New";
+background:white'>.</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif;background:white'>Script requires path to
+nvprof, which is usually available in </span><span lang=EN style='font-family:
+"Courier New";color:black;background:#D9D9D9'>/usr/local/cuda/bin/nvprof</span><span
+lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif;
+background:white'>. Script will need <b>sudo</b> access because nvprof do not
+profile kernels without <b>sudo</b> access. To obtain Figure 8(a) results for
+L2 Cache Transactions execute below command:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif;background:white'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>cd $</span><span lang=EN style='font-size:12.0pt;
+line-height:115%;font-family:"Courier New";color:black;background:#EFEFEF'>NEXTDOOR_EXP_DIR</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>python3 runPerfAnalysis.py -nextdoor $NEXTDOOR_DIR -nvprof
+/usr/local/cuda/bin/nvprof -metric l2_read_transactions</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Calibri",sans-serif;
+background:white'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif;background:white'>To obtain Figure 8(b)
+results for Warp Execution Efficiency, execute below commands:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>cd $</span><span lang=EN style='font-size:12.0pt;
+line-height:115%;font-family:"Courier New";color:black;background:#EFEFEF'>NEXTDOOR_EXP_DIR</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>python3 runPerfAnalysis.py -nextdoor $NEXTDOOR_DIR -nvprof
+/usr/local/cuda/bin/nvprof -metric warp_execution_efficiency</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";background:
+#EFEFEF'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif;background:white'>To obtain Table 4 results
+for Global Store Efficiency, execute below commands:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>cd $</span><span lang=EN style='font-size:12.0pt;
+line-height:115%;font-family:"Courier New";color:black;background:#EFEFEF'>NEXTDOOR_EXP_DIR</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>python3 runPerfAnalysis.py -nextdoor $NEXTDOOR_DIR -nvprof
+/usr/local/cuda/bin/nvprof -metric gst_efficiency</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif;background:white'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif;background:white'>To obtain Table 4 results
+for Multiprocessor Activity, execute below commands:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>cd $</span><span lang=EN style='font-size:12.0pt;
+line-height:115%;font-family:"Courier New";color:black;background:#EFEFEF'>NEXTDOOR_EXP_DIR</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
+background:#EFEFEF'>python3 runPerfAnalysis.py -nextdoor $NEXTDOOR_DIR -nvprof
+/usr/local/cuda/bin/nvprof -metric sm_efficiency</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:"Calibri",sans-serif;background:white'>&nbsp;</span></p>
+
 </div>
-</div>
+
+</body>
+
+</html>
