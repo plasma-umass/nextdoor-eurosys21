@@ -77,21 +77,11 @@ ul
 
 <div class=WordSection1>
 
-<h1 style='margin-top:24.0pt'><a name="_wopfa3r5nn9v"></a><span lang=EN
-style='font-size:23.0pt;line-height:115%;font-family:"Calibri",sans-serif'>#213
-Accelerating Graph Sampling for Graph Machine Learning using GPUs</span></h1>
-
 <h2><a name="_8abf1pr0gkmf"></a><span lang=EN style='font-size:17.0pt;
 line-height:115%;font-family:"Calibri",sans-serif'>Introduction</span></h2>
 
 <p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
-font-family:"Calibri",sans-serif'>In this document we describe the details of
-the artifact of the paper “Accelerating Graph Sampling for Graph Machine
-Learning using GPUs” and how to reproduce key results of the paper. In the
-paper due to double-blind submission, we refer to our system as <i>cuSampler</i>.
-However, we will change its name to <i>NextDoor</i> in the final version and
-hence, we refer to the system as <i>NextDoor</i> in the artifact and in this
-document. Our system is publicly available at </span><span lang=EN><a
+font-family:"Calibri",sans-serif'>Our system is publicly available at </span><span lang=EN><a
 href="https://github.com/plasma-umass/nextdoor/"><span style='font-size:12.0pt;
 line-height:115%;font-family:"Calibri",sans-serif;color:#1155CC'>https://github.com/plasma-umass/nextdoor/</span></a></span><span
 lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif'>
@@ -1157,7 +1147,7 @@ nvprof, which is usually available in </span><span lang=EN style='font-family:
 "Courier New";color:black;background:#D9D9D9'>/usr/local/cuda/bin/nvprof</span><span
 lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Calibri",sans-serif;
 background:white'>. Script will need <b>sudo</b> access because nvprof do not
-profile kernels without <b>sudo</b> access. To obtain Figure 8(a) results for
+profile kernels without <b>sudo</b> access. To obtain Figure 8 results for
 L2 Cache Transactions execute below command:</span></p>
 
 <p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
@@ -1173,21 +1163,6 @@ background:#EFEFEF'>python3 runPerfAnalysis.py -nextdoor $NEXTDOOR_DIR -nvprof
 
 <p class=MsoNormal><span lang=EN style='font-family:"Calibri",sans-serif;
 background:white'>&nbsp;</span></p>
-
-<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
-font-family:"Calibri",sans-serif;background:white'>To obtain Figure 8(b)
-results for Warp Execution Efficiency, execute below commands:</span></p>
-
-<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
-background:#EFEFEF'>cd $</span><span lang=EN style='font-size:12.0pt;
-line-height:115%;font-family:"Courier New";color:black;background:#EFEFEF'>NEXTDOOR_EXP_DIR</span></p>
-
-<p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:black;
-background:#EFEFEF'>python3 runPerfAnalysis.py -nextdoor $NEXTDOOR_DIR -nvprof
-/usr/local/cuda/bin/nvprof -metric warp_execution_efficiency</span></p>
-
-<p class=MsoNormal><span lang=EN style='font-family:"Courier New";background:
-#EFEFEF'>&nbsp;</span></p>
 
 <p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
 font-family:"Calibri",sans-serif;background:white'>To obtain Table 4 results
