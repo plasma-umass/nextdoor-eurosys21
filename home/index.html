@@ -8,16 +8,34 @@ layout: default
 <h1>Accelerating Graph Sampling on GPUs using NextDoor</h1>
 
 <p>
+Graph representation learning learn features of data instead of hand-engineering them.
+Graph representation learning is a fundamental step in domains such as social network analysis, recommendations, epidemiology, and more.
+Several algorithms for graph representation learning first \emph{sample} the input graph to obtain mini-batches and then \emph{train} a deep neural network (DNN) based on the samples. 
 </p>
-
-<p> </p>
-
-<h1></h1>
+<p>
+Although several systems effectively leverage GPUs for the DNN training step, the same is not true for the sampling step.
+Graph sampling takes a significant portion of total training time in real-world applications.
+We found that graph sampling can take up to 62\% of an epoch's time on a 16-core Intel Xeon Silver CPU and an NVIDIA Tesla V100 GPU.
+Hence, accelerating graph sampling is important to improve the end-to-end training time.
+</p>
+<p>
+Since samples are drawn independently, graph sampling is an ``embarrassingly parallel'' problem that seems ideal for exploiting the parallelism of GPUs.
+However, for a GPU to provide peak performance, the algorithm must be carefully designed to ensure regular computation and memory accesses, which is challenging on irregular graphs.
+Several systems have been designed for random walks, graph mining, and graph analytics.
+These systems consider samples (or subgraphs) as the fundamental unit of parallelism: they grow all samples in parallel by looking up the neighbors of the vertices of each sample.
+However, such an approach leads to two issues in these systems: (i) irregular memory accesses and divergent control flow because consecutive threads can access the neighbors of different vertices, and
+(ii) lower parallelism because computation on all vertices in a sample is performed serially by the thread responsible for growing the sample.
+</p>
 
 <p>
+This chapter proposes NextDoor, the first system to perform efficient graph sampling on GPUs.
+NextDoor introduces transit-parallelism, which is a new approach for parallel graph sampling. In this approach, the fundamental unit of parallelism is a transit vertex, which is a vertex whose neighbors may be added to one or more samples of the graph. In transit-parallelism, each transit vertex is assigned to a group of threads such that each thread adds one neighbor of the transit vertex to one sample.
+This technique provides better GPU execution efficiency due to low warp divergence, coalesced global memory accesses, and caching of the transit vertex edges in low-latency shared memory.
+Thus the irregular computation on the graph is changed to a regular computation.
+NextDoor effectively balances load across transit vertices and has a high-level API that abstracts away the low-level details of implementing sampling on GPUs and 
+enables ML domain experts to write efficient graph sampling algorithms with few lines of code.
+NextDoor achieves significant speedups over state-of-the-art systems for graph sampling and improves training time of existing GNN systems by upto 4.75$\times$.
 </p>
-
-<h1></h1>
 
 <h2>Available Artifact</h2>
 <ul>
