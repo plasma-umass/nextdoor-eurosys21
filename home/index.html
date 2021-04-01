@@ -5,46 +5,30 @@ layout: default
 <div class="row">
 <div class="col-md-6 col-md-offset-3">
 
-<h1>Serverless Computing</h1>
+<h1>Accelerating Graph Sampling on GPUs using NextDoor</h1>
 
-<p>Serverless Computing
-  is a recent approach to cloud computing that provides programmers an 
-  interface to run functions on the cloud. Programmers does not have to think 
-  about resource allocation, or even configure the runtime environment.
-  The serverless platform takes care of automatically managing dependencies, 
-  compiles code, allocates processor and RAM. With this model, programmers only 
-  need to focus on the application code. Recently several serverless platforms 
-  have appeared and some of the popular ones are: <a href="https://azure.microsoft.com/en-us/"> Microsoft Azure</a>, <a href="https://cloud.google.com/functions/"> Google Cloud Functions</a>, <a href="https://aws.amazon.com/lambda/">Amazon AWS Lambda</a>, and <a href ="https://openwhisk.apache.org/"> Apache OpenWhisk</a>.
+<p>
 </p>
 
-<p>Unfortunately, writing correct serverless platforms and using this abstraction 
-  in the application, programmers need to know about low-level details of these
-  serverless platforms. For example, when the deployed function is called from an application, the serverless platforms does not ensure that the function will be called right away. Instead the function can be called after any time. Another example is when the serverless platform fails to execute the function. In short, "Serverless Functions are not like ordinary functions". The programmer has to handle these cases in the application. </p>
+<p> </p>
 
-<h1>Formal Semantics of Serverless Computing</h1>
+<h1></h1>
 
-<p>In this project, we developed operational semantics for serverless computing, &lambda;<sub><img src="../aws-lambda-logo.svg" width=10 height=10></sub>. &lambda;<sub><img src="../aws-lambda-logo.svg" width=10 height=10></sub> formalizes the internals of a serverless platform.
-  &lambda;<sub><img src="../aws-lambda-logo.svg" width=10 height=10></sub> describes the low-level behaviors of these serverless platforms,
-  that includes failures, concurremcy, function restarts, and instance reuse. 
-  Programmers can use these semantics to guide the development of programming 
-  tools and extensions to serverless platforms.
+<p>
 </p>
 
-<h1>Serverless Compositions</h1>
-Serverless platforms encourage programmers to decompose large applications into several small functions. These functions can also be used by other programmers to compose with other functions.
-Smaller functions are not only easier to understand, but they also provides better reusability. 
+<h1></h1>
 
-Unfortunately, current solutions to serverless compositions exhibit significant overhead. We have extended our operational semantics to a new domain specific language called Serverless Programming Language (SPL). SPL provide interfaces for composing serverless functions and follows the operational semantics. SPL is based on provides the interface using three basic arrow combinators of Hughes' arrows. With SPL our benchmarks runs orders of magnitude faster than <a href="https://github.com/apache/openwhisk/blob/master/docs/conductors.md">OpenWhisk Conductor</a>.
-<h2>SPL Implementations</h2>
-  <ul>
-      <li>OpenWhisk SPL implementation is available <a href="https://github.com/plasma-umass/openwhisk">here</a>.</li>
-      <li>Standalone SPL server for Google Cloud Function is available
-          <a href="https://github.com/plasma-umass/spl">here</a>.
+<h2>Available Artifact</h2>
+<ul>
+      <li>NextDoor is available <a href="https://github.com/plasma-umass/nextdoor">here</a>.</li>
+      <li>NextDoor Experimental Setup is available
+          <a href="https://github.com/abhijangda/nextdoor-experiments">here</a>.
       </li>
-  </ul>
+</ul>
 
 <h1>Technical Paper</h1>
-<p>To know more about our work checkout our paper <a href="https://arxiv.org/abs/1902.05870">Formal Foundations of Serverless Computing</a>.</p>
+<p>To know more about our work checkout our paper <a href="https://arxiv.org/pdf/2009.06693.pdf">Accelerating Graph Sampling for Graph Machine Learning using GPUs</a>.</p>
 
 </div>
 </div>
